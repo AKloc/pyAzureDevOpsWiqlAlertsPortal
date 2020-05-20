@@ -1,7 +1,5 @@
 import React from "react";
 import Jumbotron from "react-bootstrap/Jumbotron";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 
 function Header() {
   return (
@@ -10,11 +8,6 @@ function Header() {
       <p className="lead">
         Send alerts generated from Azure DevOps' Wiql to Slack!
       </p>
-      <Row>
-        <Col>View Alerts</Col>
-        <Col>Create New Alert</Col>
-        <Col>About</Col>
-      </Row>
     </Jumbotron>
   );
 }
