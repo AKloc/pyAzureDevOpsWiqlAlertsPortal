@@ -2,7 +2,8 @@ import React from "react";
 import Header from "./common/Header";
 import Home from "./common/Home";
 import About from "./common/About";
-import Alert from "./common/Alert";
+import AlertEdit from "./common/AlertEdit";
+import Alerts from "./common/Alerts";
 import Container from "react-bootstrap/Container";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Row from "react-bootstrap/Row";
@@ -25,7 +26,10 @@ function App() {
                   <Link to="/">Home</Link>
                 </ul>
                 <ul>
-                  <Link to="/alert">Alerts</Link>
+                  <Link to="/alerts">View Alerts</Link>
+                </ul>
+                <ul>
+                  <Link to="/alert">Create New Alert</Link>
                 </ul>
                 <ul>
                   <Link to="/about">About</Link>
@@ -36,8 +40,11 @@ function App() {
               <Route path="/about" exact>
                 <About />
               </Route>
+              <Route path="/alerts" exact>
+                <Alerts />
+              </Route>
               <Route path="/alert" exact>
-                <Alert />
+                <AlertEdit />
               </Route>
               <Route path="/" exact>
                 <Home />

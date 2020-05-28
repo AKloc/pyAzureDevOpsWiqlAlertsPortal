@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 
-function Alert() {
+function AlertEdit() {
+  const [alertName, setAlertName] = useState();
+  const [queryId, setQueryId] = useState();
+  const [queryUri, setQueryUri] = useState();
+  const [apiToken, setApiToken] = useState();
+
   const handleSubmit = (event) => {
     alert("Button clicked.");
-  };
-
-  const handleFieldChanged = (event) => {
-    alert("Field changed");
   };
 
   return (
@@ -14,55 +15,55 @@ function Alert() {
       <h1>Here's the Alerts page.</h1>
       <form onSubmit={(e) => handleSubmit()}>
         <div className="form-group">
-          <label for="alertNameInput">
+          <label for="alertName">
             Alert Name:
             <input
               type="text"
-              id="alertNameInput"
+              id="alertName"
               class="form-control"
-              value={"d"}
-              onChange={(e) => handleFieldChanged()}
+              value={alertName}
+              onChange={(e) => setAlertName(e.target.value)}
             />
           </label>
         </div>
         <div className="form-group">
-          <label for="queryIdInput">
+          <label for="queryId">
             Query ID:
             <input
               type="text"
-              id="queryIdInput"
+              id="queryId"
               class="form-control"
-              value={"d"}
-              onChange={(e) => handleFieldChanged()}
+              value={queryId}
+              onChange={(e) => setQueryId(e.target.value)}
             />
           </label>
         </div>
         <div className="form-group">
-          <label for="queryUriInput">
+          <label for="queryUri">
             Query URI:
             <input
               type="text"
-              id="queryUriInput"
+              id="queryUri"
               class="form-control"
-              value={"d"}
-              onChange={(e) => handleFieldChanged()}
+              value={queryUri}
+              onChange={(e) => setQueryUri(e.target.value)}
             />
           </label>
         </div>
         <div className="form-group">
-          <label for="apiTokenInput">
+          <label for="apiToken">
             API Token:
             <input
               type="text"
-              id="apiTokenInput"
+              id="apiToken"
               class="form-control"
-              value={"d"}
-              onChange={(e) => handleFieldChanged()}
+              value={apiToken}
+              onChange={(e) => setApiToken(e.target.value)}
             />
           </label>
         </div>
 
-        <button type="submit" class="btn btn-primary">
+        <button type="submit" class="btn btn-outline-primary">
           Submit
         </button>
       </form>
@@ -70,4 +71,4 @@ function Alert() {
   );
 }
 
-export default Alert;
+export default AlertEdit;
