@@ -6,30 +6,32 @@ function Alerts() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch(
-      `https://api.github.com/search/commits?q=repo:facebook/react+css&page=1`,
-      {
-        method: "GET",
-        headers: new Headers({
-          Accept: "application/vnd.github.cloak-preview",
-        }),
-      }
-    )
+    fetch(`https://22mwpclc8f.execute-api.us-east-1.amazonaws.com/Alerts`, {
+      method: "GET",
+      headers: new Headers({
+        Accept: "application/json",
+      }),
+    })
       .then((res) => res.json())
       .then((response) => {
-        setAlertsItems(response.items);
+        setAlertsItems(response);
+        debugger;
         setIsLoading(false);
       })
       .catch((error) => console.log(error));
-  });
+  }, []);
+
+  function handleSubmit() {
+    alert("You submitted.");
+  }
 
   return (
     <div>
-      <h1>Here are all of the alert...</h1>
+      <h1>Here are all of the alerts...</h1>
       {isLoading && <p>Loading...</p>}
       {alertsItems.map((c, index) => (
         <div key={index}>
-          {c.author.login}: {c.commit.message}
+          {c.owner}: {c.alert_name}
         </div>
       ))}
     </div>

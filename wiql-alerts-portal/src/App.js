@@ -5,7 +5,13 @@ import About from "./common/About";
 import AlertEdit from "./common/AlertEdit";
 import Alerts from "./common/Alerts";
 import Container from "react-bootstrap/Container";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  NavLink,
+} from "react-router-dom";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
@@ -21,18 +27,26 @@ function App() {
         <Col>
           <Router>
             <div>
-              <nav class="navbar navbar-light bg-light">
+              <nav className="navbar navbar-light bg-light">
                 <ul>
-                  <Link to="/">Home</Link>
+                  <NavLink exact to="/" activeClassName="active">
+                    Home
+                  </NavLink>
                 </ul>
                 <ul>
-                  <Link to="/alerts">View Alerts</Link>
+                  <NavLink exact to="/alerts" activeClassName="active">
+                    View Alerts
+                  </NavLink>
                 </ul>
                 <ul>
-                  <Link to="/alert">Create New Alert</Link>
+                  <NavLink exact to="/alert" activeClassName="active">
+                    Create New Alert
+                  </NavLink>
                 </ul>
                 <ul>
-                  <Link to="/about">About</Link>
+                  <NavLink exact to="/about" activeClassName="active">
+                    About
+                  </NavLink>
                 </ul>
               </nav>
             </div>

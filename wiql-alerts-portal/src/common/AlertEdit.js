@@ -12,7 +12,7 @@ function AlertEdit() {
 
   return (
     <>
-      <h1>Here's the Alerts page.</h1>
+      <h1>Here's the Alert Edit page.</h1>
       <form onSubmit={(e) => handleSubmit()}>
         <div className="form-group">
           <label for="alertName">
