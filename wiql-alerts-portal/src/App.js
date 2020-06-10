@@ -9,7 +9,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
   NavLink,
 } from "react-router-dom";
 import Row from "react-bootstrap/Row";
@@ -40,7 +39,7 @@ function App() {
                 </ul>
                 <ul>
                   <NavLink exact to="/alert" activeClassName="active">
-                    Create New Alert
+                    Create / Edit Alert
                   </NavLink>
                 </ul>
                 <ul>
@@ -58,6 +57,9 @@ function App() {
                 <Alerts />
               </Route>
               <Route path="/alert" exact>
+                <AlertEdit />
+              </Route>
+              <Route path="/alert/:alertName" exact>
                 <AlertEdit />
               </Route>
               <Route path="/" exact>
