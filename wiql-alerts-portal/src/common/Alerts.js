@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 
 function Alerts() {
   const [alertsItems, setAlertsItems] = useState([]);
@@ -31,7 +32,8 @@ function Alerts() {
       {isLoading && <p>Loading...</p>}
       {alertsItems.map((c, index) => (
         <div key={index}>
-          {c.owner}: {c.alert_name}
+          {c.owner}:{" "}
+          <NavLink to={"/alert/" + c.alert_name}>{c.alert_name}</NavLink>
         </div>
       ))}
     </div>

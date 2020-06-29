@@ -3,7 +3,12 @@ import { useParams } from "react-router-dom";
 
 function AlertEdit() {
   let params = useParams();
-  const [alertsItems, setAlertsItems] = useState([]);
+
+  // On the database, the alert object is nested - root and query parameters.
+  // So, use a separate state for the root alerts item and the query properties
+  // to make the "handleInputChange" method take care of everything.
+  const [alertsItem, setAlertsItem] = useState({});
+  const [itemQueryProperties, setItemQueryProperties] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -19,19 +24,30 @@ function AlertEdit() {
     )
       .then((res) => res.json())
       .then((response) => {
-        setAlertsItems(response);
+        setAlertsItem(response[0]);
+        setItemQueryProperties(response[0].azure_devops_query);
         setIsLoading(false);
       })
       .catch((error) => console.log(error));
   }, []);
 
-  const [alertName, setAlertName] = useState();
-  const [queryId, setQueryId] = useState();
-  const [queryUri, setQueryUri] = useState();
-  const [apiToken, setApiToken] = useState();
-
   const handleSubmit = (event) => {
     alert("Button clicked.");
+  };
+
+  // This one is key. "setter" is the state setter method for the state we want
+  // to modify. Because of the way the input fields are setup, we know the target
+  // name will be the name of the property we want to change, so use a spreader
+  const handleInputChange = (setter, event) => {
+    let propertyName = event.target.name;
+    let propertyValue = event.target.value;
+
+    debugger;
+
+    setter((itemState) => ({
+      ...itemState,
+      [propertyName]: propertyValue,
+    }));
   };
 
   return (
@@ -44,9 +60,10 @@ function AlertEdit() {
             <input
               type="text"
               id="alertName"
+              name="alertName"
               className="form-control"
-              value={alertName}
-              onChange={(e) => setAlertName(e.target.value)}
+              value={alertsItem.alert_name || ""}
+              onChange={handleInputChange}
             />
           </label>
         </div>
@@ -56,9 +73,12 @@ function AlertEdit() {
             <input
               type="text"
               id="queryId"
+              name="query_id"
               className="form-control"
-              value={queryId}
-              onChange={(e) => setQueryId(e.target.value)}
+              value={!isLoading && itemQueryProperties.query_id}
+              onChange={(event) =>
+                handleInputChange(setItemQueryProperties, event)
+              }
             />
           </label>
         </div>
@@ -68,9 +88,12 @@ function AlertEdit() {
             <input
               type="text"
               id="queryUri"
+              name="query_uri"
               className="form-control"
-              value={queryUri}
-              onChange={(e) => setQueryUri(e.target.value)}
+              value={!isLoading && itemQueryProperties.query_uri}
+              onChange={(event) =>
+                handleInputChange(setItemQueryProperties, event)
+              }
             />
           </label>
         </div>
@@ -80,9 +103,12 @@ function AlertEdit() {
             <input
               type="text"
               id="apiToken"
+              name="api_token"
               className="form-control"
-              value={apiToken}
-              onChange={(e) => setApiToken(e.target.value)}
+              value={!isLoading && itemQueryProperties.api_token}
+              onChange={(event) =>
+                handleInputChange(setItemQueryProperties, event)
+              }
             />
           </label>
         </div>
